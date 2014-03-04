@@ -1,23 +1,252 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4451" systemVersion="13A461" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0Zt-Qq-7or">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3676"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--Navigation Controller - Flip Your Phone!-->
+        <scene sceneID="IEb-6O-NNR">
+            <objects>
+                <navigationController title="Flip Your Phone!" definesPresentationContext="YES" id="0Zt-Qq-7or" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="98b-H0-QJ7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="F58-ik-ITH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CG8-Qt-TdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-284" y="110"/>
+        </scene>
+        <!--View Controller - Flip Your Phone!-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BqZ-LY-KVR"/>
+                        <viewControllerLayoutGuide type="bottom" id="DV5-j0-Tzr"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-lF-D6o">
+                                <rect key="frame" x="0.0" y="209" width="320" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="4nz-0O-wxx"/>
+                                    <constraint firstAttribute="height" constant="150" id="mij-Qn-0Bl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="200"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLIPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrH-IG-W4G">
+                                <rect key="frame" x="0.0" y="364" width="320" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="mwu-Tr-dwD"/>
+                                    <constraint firstAttribute="width" constant="320" id="rJ8-fe-QXb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCC-kU-cjc">
+                                <rect key="frame" x="0.0" y="84" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="2dG-c1-1KN"/>
+                                    <constraint firstAttribute="height" constant="60" id="GKY-ta-XfN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-3s-xgV">
+                                <rect key="frame" x="20" y="473" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="VDU-dT-4D7"/>
+                                    <constraint firstAttribute="height" constant="75" id="dh5-bN-WjE"/>
+                                </constraints>
+                                <state key="normal" image="start_button_enabled.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="start_button_disabled.png"/>
+                                <connections>
+                                    <action selector="startButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XVd-se-LD6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnL-r7-Ma1">
+                                <rect key="frame" x="123" y="473" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="6nZ-LN-3qN"/>
+                                    <constraint firstAttribute="width" constant="75" id="a3q-UE-dBm"/>
+                                </constraints>
+                                <state key="normal" image="stop_button_enabled.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="stop_button_disabled.png"/>
+                                <connections>
+                                    <action selector="stopButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NEA-F4-UeP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgG-fg-uVH">
+                                <rect key="frame" x="225" y="473" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Dc3-cy-IqB"/>
+                                    <constraint firstAttribute="width" constant="75" id="h7C-ta-coq"/>
+                                </constraints>
+                                <state key="normal" image="reset_button_enabled.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="reset_button_disabled.png"/>
+                                <connections>
+                                    <action selector="resetButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="iqf-Ax-PKf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="wnL-r7-Ma1" secondAttribute="centerX" id="5hM-go-3dD"/>
+                            <constraint firstAttribute="centerX" secondItem="UqR-lF-D6o" secondAttribute="centerX" id="B2k-cK-CHC"/>
+                            <constraint firstAttribute="trailing" secondItem="VgG-fg-uVH" secondAttribute="trailing" constant="20" id="DHI-pB-0Uv"/>
+                            <constraint firstItem="Qqy-3s-xgV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="I7b-sb-7lV"/>
+                            <constraint firstItem="DV5-j0-Tzr" firstAttribute="top" secondItem="Qqy-3s-xgV" secondAttribute="bottom" constant="20" id="NTF-aa-zBX"/>
+                            <constraint firstAttribute="centerY" secondItem="UqR-lF-D6o" secondAttribute="centerY" id="W9x-kx-Frr"/>
+                            <constraint firstItem="UCC-kU-cjc" firstAttribute="top" secondItem="BqZ-LY-KVR" secondAttribute="bottom" constant="20" id="ZVS-Kc-7vo"/>
+                            <constraint firstItem="OrH-IG-W4G" firstAttribute="top" secondItem="UqR-lF-D6o" secondAttribute="bottom" constant="5" id="eTa-MB-f9h"/>
+                            <constraint firstItem="DV5-j0-Tzr" firstAttribute="top" secondItem="wnL-r7-Ma1" secondAttribute="bottom" constant="20" id="kMb-Dc-DS1"/>
+                            <constraint firstItem="DV5-j0-Tzr" firstAttribute="top" secondItem="VgG-fg-uVH" secondAttribute="bottom" constant="20" id="nLG-TK-fZW"/>
+                            <constraint firstAttribute="centerX" secondItem="UCC-kU-cjc" secondAttribute="centerX" id="oCu-MV-Wt3"/>
+                            <constraint firstAttribute="centerX" secondItem="OrH-IG-W4G" secondAttribute="centerX" id="wDb-s9-7mY"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Flip Your Phone!" id="5eE-LQ-pOC">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Kvx-Ht-96E"/>
+                        <barButtonItem key="leftBarButtonItem" id="N8J-Iy-Me6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="uPK-3P-o1i">
+                                <rect key="frame" x="16" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="kmn-M4-Kzf" kind="push" id="c7I-13-Yr8"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="gEU-R7-U0Y">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="vXZ-lx-hvc" id="eZt-y2-kyp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="flipsCounterLabel" destination="UqR-lF-D6o" id="NmG-Ys-0go"/>
+                        <outlet property="infoButton" destination="uPK-3P-o1i" id="VBG-fi-oHX"/>
+                        <outlet property="resetButton" destination="VgG-fg-uVH" id="PHe-K2-BDb"/>
+                        <outlet property="shareButton" destination="gEU-R7-U0Y" id="sam-gr-iU5"/>
+                        <outlet property="startButton" destination="Qqy-3s-xgV" id="7IM-dN-5Ez"/>
+                        <outlet property="stopButton" destination="wnL-r7-Ma1" id="qbl-tO-4QZ"/>
+                        <outlet property="timerLabel" destination="UCC-kU-cjc" id="TqS-f1-byh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="158" y="110"/>
+        </scene>
+        <!--Information View Controller - Information-->
+        <scene sceneID="sYq-2W-xkb">
+            <objects>
+                <viewController id="kmn-M4-Kzf" customClass="InformationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Ky-eA-xcA"/>
+                        <viewControllerLayoutGuide type="bottom" id="aBY-pb-d6I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xnP-zm-ydb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1) Press Start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfC-J2-f7Q">
+                                <rect key="frame" x="20" y="109" width="197" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2) Flip your phone!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9j-Bh-TaL">
+                                <rect key="frame" x="20" y="209" width="197" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3) Press Stop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9e-Oz-XD1">
+                                <rect key="frame" x="20" y="309" width="197" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4) Share your score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qP-51-v0s">
+                                <rect key="frame" x="20" y="409" width="197" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="start_button_enabled.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ggj-ox-2Ve">
+                                <rect key="frame" x="225" y="84" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="flip_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="nC4-h2-q1U">
+                                <rect key="frame" x="225" y="184" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stop_button_enabled.png" translatesAutoresizingMaskIntoConstraints="NO" id="7hr-ol-V06">
+                                <rect key="frame" x="225" y="284" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="atF-xz-P7C">
+                                <rect key="frame" x="225" y="384" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-v3-5KZ">
+                                <rect key="frame" x="60" y="488" width="200" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="follow_us.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="followUsButtonPressed:" destination="kmn-M4-Kzf" eventType="touchUpInside" id="iCX-yU-kvw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Information" id="NrT-Nx-TEp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fF-es-J7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="583" y="110"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flip_image.png" width="100" height="100"/>
+        <image name="follow_us.png" width="200" height="60"/>
+        <image name="reset_button_disabled.png" width="100" height="100"/>
+        <image name="reset_button_enabled.png" width="100" height="100"/>
+        <image name="share_image.png" width="100" height="100"/>
+        <image name="start_button_disabled.png" width="100" height="100"/>
+        <image name="start_button_enabled.png" width="100" height="100"/>
+        <image name="stop_button_disabled.png" width="100" height="100"/>
+        <image name="stop_button_enabled.png" width="100" height="100"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
