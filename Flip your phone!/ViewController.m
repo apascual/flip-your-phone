@@ -19,7 +19,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	self.screenName = [NSString stringWithFormat:@"%@", [self class]];
+    
     self.startButton.enabled = YES;
     self.stopButton.enabled = NO;
     self.resetButton.enabled = NO;

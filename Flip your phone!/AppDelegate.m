@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
 
 @implementation AppDelegate
 
@@ -18,7 +19,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    #if !TARGET_IPHONE_SIMULATOR
+    
+    /** Google Analytics **/
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 10;
+    // Optional: set debug to YES for extra debugging information.
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelNone];
+    // Create tracker instance.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-48654848-1"];
+    
+    #endif
+    
+    
     return YES;
 }
 							
