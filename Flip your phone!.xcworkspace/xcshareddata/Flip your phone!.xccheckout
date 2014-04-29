@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1FBB6B01-DBCC-44D8-90FB-89A55D05262A</string>
+	<string>D92DC8D8-25B9-4AB7-AADE-926D9F5ABAF3</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Flip your phone!</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>A5D48641-6E8B-4DD1-A7DF-4F1894B7F2DC</key>
-		<string>ssh://bitbucket.org/apascualh/flip-your-phone.git</string>
+		<key>C62E5411-8A52-44E8-9AFD-4A411BD88A1A</key>
+		<string>https://github.com/apascual/flip-your-phone</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Flip your phone!.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A5D48641-6E8B-4DD1-A7DF-4F1894B7F2DC</key>
+		<key>C62E5411-8A52-44E8-9AFD-4A411BD88A1A</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/apascualh/flip-your-phone.git</string>
+	<string>https://github.com/apascual/flip-your-phone</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A5D48641-6E8B-4DD1-A7DF-4F1894B7F2DC</string>
+	<string>C62E5411-8A52-44E8-9AFD-4A411BD88A1A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A5D48641-6E8B-4DD1-A7DF-4F1894B7F2DC</string>
+			<string>C62E5411-8A52-44E8-9AFD-4A411BD88A1A</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Flip your phone!</string>
+			<string>flip-your-phone</string>
 		</dict>
 	</array>
 </dict>
