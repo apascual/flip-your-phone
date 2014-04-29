@@ -1,7 +1,7 @@
 Flip Your Phone!
 ===============
 
-Flip Your Phone! is an app developed only for iOS.
+Flip Your Phone! is an app developed only for iOS. **Apple rejected it claiming that may put in danger the user devices, so I am releasing it here.**
 
 How fast can you flip your phone? 
 
