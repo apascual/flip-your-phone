@@ -527,14 +527,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Abel Pascual (78X493XZCM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Abel Pascual (78X493XZCM)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip your phone!/Flip your phone!-Prefix.pch";
 				INFOPLIST_FILE = "Flip your phone!/Flip your phone!-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F8B1A84E-31EF-4362-9206-1A094CE692DC";
+				PROVISIONING_PROFILE = "20B8C300-4BEA-4921-B653-6C926A110140";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -545,14 +545,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Abel Pascual (78X493XZCM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Abel Pascual (78X493XZCM)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flip your phone!/Flip your phone!-Prefix.pch";
 				INFOPLIST_FILE = "Flip your phone!/Flip your phone!-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F8B1A84E-31EF-4362-9206-1A094CE692DC";
+				PROVISIONING_PROFILE = "20B8C300-4BEA-4921-B653-6C926A110140";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

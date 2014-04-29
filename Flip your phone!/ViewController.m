@@ -12,6 +12,13 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) NSTimer *stopWatchTimer;
+@property (strong, nonatomic) NSDate *startDate;
+@property (nonatomic) NSInteger count;
+@property (nonatomic) NSInteger step1;
+@property (nonatomic) NSInteger step2;
+@property (nonatomic) double seconds;
+
 @end
 
 @implementation ViewController
@@ -43,92 +50,7 @@
     [self.motionManager stopAccelerometerUpdates];
 }
 
-- (UIImage*)screenshot
-{
-    // Create a graphics context with the target size
-    // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
-    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-    if (NULL != UIGraphicsBeginImageContextWithOptions)
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    else
-        UIGraphicsBeginImageContext(imageSize);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Iterate over every window from back to front
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
-        {
-            // -renderInContext: renders in the coordinate space of the layer,
-            // so we must first apply the layer's geometry to the graphics context
-            CGContextSaveGState(context);
-            // Center the context around the window's anchor point
-            CGContextTranslateCTM(context, [window center].x, [window center].y);
-            // Apply the window's transform about the anchor point
-            CGContextConcatCTM(context, [window transform]);
-            // Offset by the portion of the bounds left of and above the anchor point
-            CGContextTranslateCTM(context,
-                                  -[window bounds].size.width * [[window layer] anchorPoint].x,
-                                  -[window bounds].size.height * [[window layer] anchorPoint].y);
-            
-            // Render the layer hierarchy to the current context
-            [[window layer] renderInContext:context];
-            
-            // Restore the context
-            CGContextRestoreGState(context);
-        }
-    }
-    
-    // Retrieve the screenshot image
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
-
-- (IBAction)shareButtonPressed:(id)sender {
-    
-    if( NSClassFromString (@"UIActivityViewController") ) {
-        
-        /*UIImage *image = [self screenshot];
-        
-        UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            image = [image imageRotatedByDegrees:90.0];
-        }
-        else if(interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-        {
-            image = [image imageRotatedByDegrees:-90.0];
-        }
-        
-        
-        NSData * data = UIImagePNGRepresentation(image);
-        */
-
-        double rpm = 0.0f;
-        
-        if(self.count>0 && self.seconds>0)
-            rpm = (self.count*60)/self.seconds;
-        
-        NSString* someText = [NSString stringWithFormat:@"I have flipped my phone %ld times in %@, that is a speed of %.3f rpm. Do you think you can beat me?", (long)self.count, self.timerLabel.text, rpm];
-
-        MyActivityItemProvider *maip = [[MyActivityItemProvider alloc] init];
-        [maip setInicioMensaje:someText];
-        
-        NSArray* dataToShare = @[maip];
-        
-        UIActivityViewController* activityViewController =
-        [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-        [activityViewController setExcludedActivityTypes:
-         @[UIActivityTypeMessage, UIActivityTypeAssignToContact]];
-        [self presentViewController:activityViewController animated:YES completion:^{}];
-    }
-}
-
+#pragma mark - Timer
 
 - (IBAction)startButtonPressed:(id)sender {
     self.startButton.enabled = NO;
@@ -187,7 +109,7 @@
     self.timerLabel.text = timeString;
 }
 
-/** Core Manager **/
+#pragma mark - MotionManager
 
 - (CMMotionManager *)motionManager
 {
@@ -201,8 +123,23 @@
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
+/**
+ * So, the big main problem here is that pitch rotation does not go through all 360 degrees,
+ * instead of that, the values are between -90 and 90 degrees, passing by 0 degrees twice for a full rotation.
+ * Then, we cannot rely on checking how many times we pass by some value (because it would depend on 
+ * the rotation speed and update frequency), some tricks are used in the following code in order to 'guess' 
+ * if a full rotation has been completed.
+ *
+ * For better understanding of the following code, considering a halfAngle variable of 45 degrees, the zones are:
+ * A) From -45 in the 4th quadrant to 45 in the 1st quadrant (315 to 45 for a full 360 degrees circumference).
+ * B) From 45 in the 1st quadrant to 45 in the 2nd quadrant (45 to 135 for a full 360 degrees circumference).
+ * C) From 45 in the 2nd quadrant to -45 in the 3rd quadrant (135 to 225 for a full 360 degrees circumference).
+ * D) From -45 in the 3rd quadrant to -45 in the 4th quadrant (225 to 315 for a full 360 degrees circumference).
+ */
 - (void)startMyMotionDetect
 {
+    NSInteger halfAngle = 45;
+    
     [self.motionManager
      startDeviceMotionUpdatesToQueue:[[NSOperationQueue alloc] init]
      withHandler:^(CMDeviceMotion *data, NSError *error)
@@ -213,53 +150,108 @@
                             if(self.stopButton.enabled)
                             {
                                 CMAttitude *currentAttitude = data.attitude;
-                                float yaw = roundf((float)(RADIANS_TO_DEGREES(currentAttitude.pitch)));
                                 
-                                int positionIn360 = yaw;
-                                if (positionIn360 < 0) {
-                                    positionIn360 = 360 + positionIn360;
+                                // Converted to degrees for easier understanding
+                                NSInteger pitch = roundf((float)(RADIANS_TO_DEGREES(currentAttitude.pitch)));
+                                
+                                // Check if we have passed by the B zone
+                                if(!self.step1 && pitch>90-halfAngle)
+                                {
+                                    self.step1 = YES;
+                                }
+                                // Check if we have passed by the D zone
+                                else if(!self.step2 && pitch<-90+halfAngle)
+                                {
+                                    self.step2 = YES;
                                 }
                                 
-                                //NSLog(@"360Pos: %d", positionIn360);
-                                if(positionIn360!=self.last_position)
+                                // If we have been at least once in the B and D zones and we are now in either
+                                // the A or C zones, then we can assume that one rotation has been completed.
+                                if(pitch>(-90+halfAngle) && pitch<(90-halfAngle) && self.step1 && self.step2)
                                 {
-                                    if(positionIn360>self.last_position)
-                                    {
-                                        // Still spining
-                                        self.last_position = positionIn360;
-                                        //NSLog(@"360Pos: %d", positionIn360);
-                                    }
-                                    else
-                                    {
-                                        if(positionIn360>0&&positionIn360<45&&self.last_position>315&&self.last_position<=360&&self.step1&&self.step2)
-                                        {
-                                            self.last_position = positionIn360;
-                                            self.count++;
-                                            self.step1 = NO;
-                                            self.step2 = NO;
-                                            self.flipsCounterLabel.text = [NSString stringWithFormat:@"%ld", (long)self.count];
-                                        }
-                                    }
-                                    
-                                    if(positionIn360>45&&positionIn360<90)
-                                    {
-                                        //NSLog(@"Paso1: %d", positionIn360);
-                                        self.step1 = YES;
-                                    }
-                                    
-                                    if(positionIn360>270&&positionIn360<315)
-                                    {
-                                        //NSLog(@"Paso2: %d", positionIn360);
-                                        self.step2 = YES;
-                                    }
+                                    self.count++;
+                                    self.step1 = NO;
+                                    self.step2 = NO;
+                                    self.flipsCounterLabel.text = [NSString stringWithFormat:@"%ld", (long)self.count];
                                 }
                             }
                         }
-                        );
+                    );
      }
      ];
     
 }
 
+#pragma mark - Share
+
+- (IBAction)shareButtonPressed:(id)sender {
+    
+    if( NSClassFromString (@"UIActivityViewController") ) {
+        
+        double rpm = 0.0f;
+        
+        if(self.count>0 && self.seconds>0)
+            rpm = (self.count*60)/self.seconds;
+        
+        NSString* someText = [NSString stringWithFormat:@"I have flipped my phone %ld times in %@, that is a speed of %.3f rpm. Do you think you can beat me?", (long)self.count, self.timerLabel.text, rpm];
+        
+        MyActivityItemProvider *maip = [[MyActivityItemProvider alloc] init];
+        [maip setInicioMensaje:someText];
+        
+        NSArray* dataToShare = @[maip];
+        
+        UIActivityViewController* activityViewController =
+        [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+        [activityViewController setExcludedActivityTypes:
+         @[UIActivityTypeMessage, UIActivityTypeAssignToContact]];
+        [self presentViewController:activityViewController animated:YES completion:^{}];
+    }
+}
+
+- (UIImage*)screenshot
+{
+    // Create a graphics context with the target size
+    // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
+    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
+    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
+    if (NULL != UIGraphicsBeginImageContextWithOptions)
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    else
+        UIGraphicsBeginImageContext(imageSize);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Iterate over every window from back to front
+    for (UIWindow *window in [[UIApplication sharedApplication] windows])
+    {
+        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
+        {
+            // -renderInContext: renders in the coordinate space of the layer,
+            // so we must first apply the layer's geometry to the graphics context
+            CGContextSaveGState(context);
+            // Center the context around the window's anchor point
+            CGContextTranslateCTM(context, [window center].x, [window center].y);
+            // Apply the window's transform about the anchor point
+            CGContextConcatCTM(context, [window transform]);
+            // Offset by the portion of the bounds left of and above the anchor point
+            CGContextTranslateCTM(context,
+                                  -[window bounds].size.width * [[window layer] anchorPoint].x,
+                                  -[window bounds].size.height * [[window layer] anchorPoint].y);
+            
+            // Render the layer hierarchy to the current context
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+            
+            // Restore the context
+            CGContextRestoreGState(context);
+        }
+    }
+    
+    // Retrieve the screenshot image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 @end
